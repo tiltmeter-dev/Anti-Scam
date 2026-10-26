@@ -158,6 +158,7 @@ async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
     where: { stripeSubscriptionId: sub.id },
     data: {
       status: sub.status.toUpperCase() as any,
+      currentPeriodStart: new Date(sub.items.data[0].current_period_start * 1000),
       currentPeriodEnd: new Date(sub.items.data[0].current_period_end * 1000),
       stripeCurrentPeriodEnd: new Date(sub.items.data[0].current_period_end * 1000),
       cancelAtPeriodEnd: sub.cancel_at_period_end,
